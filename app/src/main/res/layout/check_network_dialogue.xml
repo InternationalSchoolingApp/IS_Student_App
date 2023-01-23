@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/is_light_blue">
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/no_internet_logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/no_internet_connected"/>
+
+        <TextView
+            android:id="@+id/oops_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/no_internet_logo"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rubik_medium"
+            android:includeFontPadding="false"
+            android:text="@string/oops_text"
+            android:textAlignment="center"
+            android:textColor="@color/is_dark_blue"
+            android:textSize="30sp" />
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/network_issue_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_internet_header"
+            android:fontFamily="@font/rubik"
+            android:layout_centerHorizontal="true"
+            android:includeFontPadding="false"
+            android:textSize="15sp"
+            android:layout_below="@+id/oops_text"/>
+        <TextView
+            android:lineSpacingMultiplier="1"
+            android:textAlignment="center"
+            android:id="@+id/network_issue_body"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/rubik_light"
+            android:layout_height="wrap_content"
+            android:text="@string/no_internet_body"
+            android:layout_centerHorizontal="true"
+            android:includeFontPadding="false"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/network_issue_header"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_retry"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/retry"
+            android:layout_below="@+id/network_issue_body"
+            android:textAllCaps="false"
+            android:fontFamily="@font/rubik_light"
+            android:background="@drawable/curve_corner"
+            android:backgroundTint="@color/white"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/dash_gif_blue"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

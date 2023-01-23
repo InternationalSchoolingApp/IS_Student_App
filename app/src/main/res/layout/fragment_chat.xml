@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:backgroundTint="@color/white"
+    tools:context=".fragment.ChatFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat"
+        android:id="@+id/chat_text"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="@color/dash_gif_blue"
+        android:textSize="40sp"
+        android:includeFontPadding="false"
+        android:layout_margin="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chat_text"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/teacher_row"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/curve_corner"
+        android:backgroundTint="@color/is_light_blue"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/avtar_picture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/teacher_icon" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/rubik_medium"
+            android:layout_below="@+id/avtar_picture"
+            android:text="Chat With Your Teacher"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

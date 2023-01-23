@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/subject_performance_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/curve_corner"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/subject_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:includeFontPadding="false"
+            android:text="Subject Name"
+            android:textColor="@color/dash_gif_blue"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/teacher_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
+            android:includeFontPadding="false"
+            android:text="Teacher Name"
+            android:textColor="@color/is_dark_blue"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
+            android:includeFontPadding="false"
+            android:text="Overall Score : 50%"
+            android:textColor="@color/is_dark_blue"
+            android:textSize="17sp" />
+
+        <ProgressBar
+            android:layout_marginTop="5dp"
+            android:id="@+id/score_pb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/progress_bar" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/gradable_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
+            android:includeFontPadding="false"
+            android:text="Gradable Score : 50%"
+            android:textColor="@color/is_dark_blue"
+            android:textSize="17sp" />
+
+        <ProgressBar
+            android:layout_marginTop="5dp"
+            android:id="@+id/gradable_pb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/progress_bar" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/all_activity_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik"
+            android:includeFontPadding="false"
+            android:text="All Activity : 50%"
+            android:textColor="@color/is_dark_blue"
+            android:textSize="17sp" />
+
+        <ProgressBar
+            android:layout_marginTop="5dp"
+            android:id="@+id/activity_pb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/progress_bar" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

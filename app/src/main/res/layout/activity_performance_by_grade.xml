@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:theme="@style/AppTheme"
+    tools:context=".activity.PerformanceByGradeActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/dash_gif_blue"
+                android:id="@+id/name_of_subject_performance"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:id="@+id/currentOverallScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/overallGrade"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:id="@+id/date_view"
+                android:textColor="@color/dash_gif_blue"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/gradable_activity"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:id="@+id/total_activity"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/total_assignments"/>
+
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitted"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:id="@+id/upcoming"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pending"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/passed"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:id="@+id/failed"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitted_before_time"/>
+
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitted_on_time"/>
+
+
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:fontFamily="@font/rubik"
+                android:includeFontPadding="false"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/dash_gif_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/submitted_late"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/reltive_perform_by_subject"
+                android:visibility="gone"
+                android:background="@drawable/login_background"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/activity_list_performance"
+                    />
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

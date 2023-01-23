@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">IS Student App</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="retry">Retry</string>
+    <string name="forget_password_text">forgot password ?</string>
+    <string name="submit_text">Submit</string>
+    <string name="no_internet_header">No Internet</string>
+    <string name="oops_text">OOPS!</string>
+    <string name="no_internet_body">Check connection</string>
+    <string name="hi_text">Hi, </string>
+    <string name="your_program_text">Your Program</string>
+    <string name="class_text">Class Text</string>
+    <string name="to_do_text">TO-DO</string>
+    <string name="performance_text">Performance</string>
+    <string name="grading_text">Grading</string>
+    <string name="name_text">Name</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="login_to_continue">Please login to continue</string>
+    <string name="title_activity_forget">ForgetActivity</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="title_activity_performance">PerformanceActivity</string>
+    <string name="title_activity_performance_by_grade">PerformanceByGradeActivity</string>
+    <string name="title_activity_notes">NotesActivity</string>
+    <string name="title_activity_create_notes">CreateNotes</string>
+    <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_recent_chat">RecentChatActivity</string>
+    <string name="title_activity_assigned_teachers">AssignedTeachersActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_teacher_profile">TeacherProfileActivity</string>
+    <string name="title_activity_notification_view">NotificationViewActivity</string>
+    <string name="title_activity_notes_view">NotesViewActivity</string>
+    <string name="title_activity_schedule_view">ScheduleViewActivity</string>
+
+
+</resources>
