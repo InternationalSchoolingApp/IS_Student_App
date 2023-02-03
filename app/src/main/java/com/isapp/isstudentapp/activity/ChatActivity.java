@@ -129,7 +129,7 @@ public class ChatActivity extends BaseActivity {
             conversion.put("teacherName", teacherName);
             conversion.put("teacherSubject", courseName);
             conversion.put("studentName",preferenceManager.getString(Constants.NAME) );
-            conversion.put(Constants.STUDENT_ID, String.valueOf(preferenceManager.getInt(Constants.USER_ID)));
+            conversion.put(Constants.STUDENT_ID, String.valueOf(preferenceManager.getInt(Constants.SSID)));
             conversion.put(Constants.KEY_SUBJECT_NAME, courseName);
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.chatEdittext.getText().toString());
             conversion.put(Constants.KEY_TIME_STAMP, new Date());
@@ -150,7 +150,6 @@ public class ChatActivity extends BaseActivity {
                 JSONObject body = new JSONObject();
                 body.put(Constants.REMOTE_MESSAGE_DATA, data);
                 body.put(Constants.REGISTRATION_IDS, tokens);
-
                 sendNotification(body.toString());
 
             }catch ( Exception exception){

@@ -43,17 +43,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         user.id = message.getData().get(Constants.USER_EMAIL);
         user.name = message.getData().get(Constants.NAME);
         user.token = message.getData().get(Constants.FIREBASE_TOKEN);
-
+        Log.d("MESSAGE COMING", "onMessageReceived: "+ message.getData().get(Constants.KEY_MESSAGE));
         int notificationId = new Random().nextInt();
         String channelId = "chat_message";
 
         Intent intent = new Intent(this, RecentChatActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
-        builder.setSmallIcon(R.drawable.bellnotify);
+        builder.setSmallIcon(R.drawable.islogomipmap);
         builder.setContentTitle(user.name);
         builder.setContentText(message.getData().get(Constants.KEY_MESSAGE));
+        Log.d("MESSAGE COMING", "onMessageReceived: "+ message.getData().get(Constants.KEY_MESSAGE));
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message.getData().get(Constants.KEY_MESSAGE)));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setContentIntent(pendingIntent);

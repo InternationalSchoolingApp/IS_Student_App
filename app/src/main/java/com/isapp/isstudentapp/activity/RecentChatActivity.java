@@ -109,9 +109,7 @@ public class RecentChatActivity extends BaseActivity {
                             conversation.get(i).teacherEmail = documentChange.getDocument().getString(Constants.KEY_RECIEVER_ID);
                             break;
                         }
-
                     }
-
                 }
             }
             Collections.sort(conversation, (obj1, obj2)-> obj2.dateObject.compareTo(obj1.dateObject));
