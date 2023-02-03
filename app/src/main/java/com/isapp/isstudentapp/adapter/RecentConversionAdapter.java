@@ -50,7 +50,7 @@ public class RecentConversionAdapter extends RecyclerView.Adapter<RecentConversi
             binding.teacherRecentMessage.setText(chatMessage.message);
             binding.timeRecentMessage.setText(chatMessage.dateObject.toString());
             String teacherId = chatMessage.teacherId;
-            String teacherName = chatMessage.teacherName;
+            String teacherName = chatMessage.conversionName;
             String teacherEmail = chatMessage.teacherEmail;
             String teacherSubject = chatMessage.teacherCourse;
 

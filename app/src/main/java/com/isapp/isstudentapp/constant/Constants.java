@@ -11,6 +11,7 @@ public class Constants {
     public static final String NAME = "name";
     public static final String PLATFORM_ID = "platformId";
     public static final String TEACHER_ID = "teacherId";
+    public static final String STUDENT_ID = "studentId";
     public static final String SCHOOL_ID = "schoolId";
     public static final String PREFERENCE_NAME = "ISAPP";
     public static final String USER_LOGGED = "logged";

@@ -1,5 +1,6 @@
 package com.isapp.isstudentapp.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -12,6 +13,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.fragment.ChatFragment;
@@ -36,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     PreferenceManager preferenceManager;
+    FirebaseFirestore firebaseFirestore;
     Animation slide_up;
     long pressedTime;
     NetworkChangeListener networkChangeListner = new NetworkChangeListener();
@@ -47,16 +54,27 @@ public class DashboardActivity extends AppCompatActivity {
 
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         init();
         binding.notificationBell.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, NotificationActivity.class);
             startActivity(intent);
         });
+        updateFireBaseToken();
         binding.bottomNavMenu.setItemSelected(R.id.nav_dashboard, true);
         getNotificationCount();
         getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), new DashboardFragment()).commit();
         bottomMenu();
+
+    }
+
+    private void updateFireBaseToken() {
+        DocumentReference docRef = firebaseFirestore.collection(Constants.FIREBASE_USER_DB).document(preferenceManager.getString(Constants.USER_EMAIL));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                docRef.update("firebaseToken", preferenceManager.getString(Constants.FIREBASE_TOKEN));
+            }
+        });
 
     }
 
@@ -98,6 +116,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void init() {
+        firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setCancelable(false);

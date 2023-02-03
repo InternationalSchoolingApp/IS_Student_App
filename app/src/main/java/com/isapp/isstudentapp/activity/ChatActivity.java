@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -118,12 +119,17 @@ public class ChatActivity extends BaseActivity {
         if (conversionId != null) {
             updateConversion(binding.chatEdittext.getText().toString());
         } else {
+
             HashMap<String, Object> conversion = new HashMap<>();
             conversion.put(Constants.KEY_SENDER_ID, senderId);
             conversion.put(Constants.KEY_SENDER_NAME, preferenceManager.getString(Constants.NAME));
             conversion.put(Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase());
             conversion.put(Constants.KEY_RECEIVER_NAME, teacherName);
             conversion.put(Constants.TEACHER_ID, teacherId);
+            conversion.put("teacherName", teacherName);
+            conversion.put("teacherSubject", courseName);
+            conversion.put("studentName",preferenceManager.getString(Constants.NAME) );
+            conversion.put(Constants.STUDENT_ID, String.valueOf(preferenceManager.getInt(Constants.USER_ID)));
             conversion.put(Constants.KEY_SUBJECT_NAME, courseName);
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.chatEdittext.getText().toString());
             conversion.put(Constants.KEY_TIME_STAMP, new Date());
@@ -236,14 +242,25 @@ public class ChatActivity extends BaseActivity {
 
 
     private void addConversion(HashMap<String, Object> conversion) {
-        database.collection(Constants.KEY_COLLECTIONS_CONVERSATION)
-                .add(conversion)
-                .addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
+        CollectionReference conversation = database.collection(Constants.KEY_COLLECTIONS_CONVERSATION);
+        conversation.document(""+preferenceManager.getString(Constants.USER_EMAIL).toLowerCase()+" - "+teacherEmail.toLowerCase()).set(conversion).addOnSuccessListener(documentReference -> conversionId = (""+preferenceManager.getString(Constants.USER_EMAIL).toLowerCase()+" - "+teacherEmail.toLowerCase())).addOnFailureListener(exception->{
+            Toast.makeText(this, "Nt updates", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     private void updateConversion(String message) {
         DocumentReference documentReference = database.collection(Constants.KEY_COLLECTIONS_CONVERSATION).document(conversionId);
-        documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIME_STAMP, new Date());
+        documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIME_STAMP, new Date(), Constants.KEY_SENDER_ID, senderId,
+                Constants.KEY_SENDER_NAME, preferenceManager.getString(Constants.NAME),
+                Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),
+                Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),
+                Constants.TEACHER_ID, teacherId,
+                "teacherName", teacherName,
+                "teacherSubject", courseName,
+                "studentName",preferenceManager.getString(Constants.NAME),
+                Constants.STUDENT_ID, String.valueOf(preferenceManager.getInt(Constants.USER_ID)),
+                Constants.KEY_SUBJECT_NAME, courseName);
     }
 
     @Override

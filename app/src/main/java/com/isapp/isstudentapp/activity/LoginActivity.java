@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading");
         progressDialog.setCancelable(false);
 
-        String email = binding.username.getEditText().getText().toString().toLowerCase().trim();
+        String email = binding.username.getEditText().getText().toString().toLowerCase().trim().toLowerCase();
         String password = binding.password.getEditText().getText().toString().trim();
 
         ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
@@ -190,7 +190,6 @@ public class LoginActivity extends AppCompatActivity {
             data.put(Constants.ROLE, Constants.STUDENT_ROLE);
             data.put(Constants.SSID, ssid);
             data.put(Constants.FIREBASE_TOKEN, preferenceManager.getString(Constants.FIREBASE_TOKEN));
-
             user.document(mail).set(data).addOnSuccessListener(d -> {
 
             }).addOnFailureListener(exception -> {
@@ -298,6 +297,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     if (task.getResult().getData() != null) {
+                        docRef.update("firebaseToken", preferenceManager.getString(Constants.FIREBASE_TOKEN));
                         i[0] = 1;
 
                         Log.d("FCM User", "Exist : " + task.getResult().getData());
