@@ -149,8 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                 String status = response.body().getStatus();
                 if (status.equals("success")) {
                     int userIdOnResponse = response.body().getUserId();
-                    // String usermail = response.body().getUsername();
-                    // String token = response.body().getToken();
                     int id = response.body().getPlatformId().intValue();
                     int ssid = response.body().getStudentStandardId();
                     String name = response.body().getName();
@@ -262,10 +260,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         if (status.equals("failed")) {
-
             textViewTitle.setText("Technical Glitch");
             textViewMessage.setText("Sorry," + "/n there is a technical Glitch");
-
         } else if (status.equals("userNotExist")) {
             textViewTitle.setText("Not Exist");
             textViewMessage.setText("The user you are trying to access is not Registered");
@@ -310,7 +306,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         if (i[0] == 1) {
             return true;
         } else {
@@ -318,6 +313,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 }

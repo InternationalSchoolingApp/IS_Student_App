@@ -1,6 +1,5 @@
 package com.isapp.isstudentapp.activity;
 
-
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -20,7 +19,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.gson.JsonArray;
 import com.isapp.isstudentapp.chat.ChatAdapter;
 import com.isapp.isstudentapp.chat.ChatMessage;
 import com.isapp.isstudentapp.common.BaseActivity;

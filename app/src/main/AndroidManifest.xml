@@ -36,7 +36,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_notification_view"
-            android:theme="@style/AppTheme.Fullscreen" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.TeacherProfileActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

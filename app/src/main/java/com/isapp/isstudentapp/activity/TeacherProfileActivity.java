@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.databinding.ActivityTeacherProfileBinding;
 import com.isapp.isstudentapp.model.TeacherInfoModel;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
@@ -28,6 +29,9 @@ public class TeacherProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
+        colorOfStatusAndNavBar.loginAndForgetPassword(this);
+
         binding = ActivityTeacherProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         progressDialog = new ProgressDialog(this);
@@ -41,11 +45,9 @@ public class TeacherProfileActivity extends AppCompatActivity {
             teacherId = extra.getString("teacherId");
             teacherName = extra.getString("teacherName");
             courseName = extra.getString("subjectName");
-            teacherEmail = extra.getString("teacherEmail");
         }
 
         binding.teacherNameInfo.setText(teacherName);
-        binding.teacherEmailView.setText(teacherEmail);
         binding.teacherSubjectTv.setText(courseName);
 
         ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);

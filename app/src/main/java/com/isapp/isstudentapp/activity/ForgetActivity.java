@@ -1,8 +1,5 @@
 package com.isapp.isstudentapp.activity;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.IntentFilter;
@@ -13,8 +10,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;

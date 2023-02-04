@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.widget.Toast;
 
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
@@ -39,6 +40,8 @@ public class CreateNotes extends AppCompatActivity {
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(this);
         progressDialog = new ProgressDialog(this);
+        binding.createNoteTitle.getEditText().setFilters(new InputFilter.LengthFilter[]{new InputFilter.LengthFilter(255)});
+        binding.createNoteMessage.getEditText().setFilters(new InputFilter.LengthFilter[]{new InputFilter.LengthFilter(255)});
         binding.createNoteBtn.setOnClickListener(v -> {
             if (validate()) {
                 saving();
