@@ -11,6 +11,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.isapp.isstudentapp.adapter.RecentConversionAdapter;
 import com.isapp.isstudentapp.chat.ChatMessage;
 import com.isapp.isstudentapp.common.BaseActivity;
+import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityRecentChatBinding;
 import com.isapp.isstudentapp.preference.PreferenceManager;
@@ -41,6 +42,8 @@ public class RecentChatActivity extends BaseActivity {
     }
 
     private void init() {
+        ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
+        colorOfStatusAndNavBar.loginAndForgetPassword(this);
         preferenceManager = new PreferenceManager(this);
         senderIdClass= preferenceManager.getString(Constants.USER_EMAIL).toLowerCase();
         conversation = new ArrayList<>();
@@ -94,7 +97,7 @@ public class RecentChatActivity extends BaseActivity {
                     chatMessage.teacherCourse = documentChange.getDocument().getString(Constants.KEY_SUBJECT_NAME);
                     chatMessage.teacherName = documentChange.getDocument().getString(Constants.KEY_RECEIVER_NAME);
                     chatMessage.teacherId  = documentChange.getDocument().getString(Constants.KEY_TEACHER_ID);
-                    chatMessage.teacherEmail  = documentChange.getDocument().getString(Constants.KEY_RECIEVER_ID);
+                    chatMessage.teacherEmail  = documentChange.getDocument().getString("teacherEmail");
                     conversation.add(chatMessage);
                 }else if (documentChange.getType() == DocumentChange.Type.MODIFIED){
                     for (int i = 0;i<conversation.size();i++){
@@ -106,7 +109,7 @@ public class RecentChatActivity extends BaseActivity {
                             conversation.get(i).teacherCourse = documentChange.getDocument().getString(Constants.KEY_SUBJECT_NAME);
                             conversation.get(i).teacherName = documentChange.getDocument().getString(Constants.KEY_RECIEVER_ID);
                             conversation.get(i).teacherId = documentChange.getDocument().getString(Constants.KEY_TEACHER_ID);
-                            conversation.get(i).teacherEmail = documentChange.getDocument().getString(Constants.KEY_RECIEVER_ID);
+                            conversation.get(i).teacherEmail = documentChange.getDocument().getString("teacherEmail");
                             break;
                         }
                     }

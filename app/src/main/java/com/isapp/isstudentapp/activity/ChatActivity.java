@@ -95,6 +95,8 @@ public class ChatActivity extends BaseActivity {
             teacherName = extra.getString("teacherName");
             courseName = extra.getString("subjectName");
             teacherEmail = extra.getString("teacherEmail").toLowerCase();
+
+            Log.d("VALUES", "init: "+teacherId + " "+ teacherName+" "+courseName +" "+teacherEmail);
         }
         binding.chatContent.setAdapter(chatAdapter);
     }
@@ -128,7 +130,9 @@ public class ChatActivity extends BaseActivity {
             conversion.put(Constants.TEACHER_ID, teacherId);
             conversion.put("teacherName", teacherName);
             conversion.put("teacherSubject", courseName);
-            conversion.put("studentName",preferenceManager.getString(Constants.NAME) );
+            conversion.put("teacherEmail", teacherEmail);
+            conversion.put("studentName",preferenceManager.getString(Constants.NAME));
+            conversion.put("studentEmail",senderId);
             conversion.put(Constants.STUDENT_ID, String.valueOf(preferenceManager.getInt(Constants.SSID)));
             conversion.put(Constants.KEY_SUBJECT_NAME, courseName);
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.chatEdittext.getText().toString());
@@ -255,6 +259,7 @@ public class ChatActivity extends BaseActivity {
                 Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),
                 Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),
                 Constants.TEACHER_ID, teacherId,
+                "teacherEmail", teacherEmail,
                 "teacherName", teacherName,
                 "teacherSubject", courseName,
                 "studentName",preferenceManager.getString(Constants.NAME),
