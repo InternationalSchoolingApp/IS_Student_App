@@ -1,7 +1,6 @@
 package com.isapp.isstudentapp.retrofit;
 
 import com.isapp.isstudentapp.model.*;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -55,5 +54,18 @@ public interface ApiInterface {
 
     @POST("get-student-progress-report-detail")
     Call<SubjectPerformanceDetail> progressBySubject(@Body SubjectPerformanceDetail subjectListPerformance);
+
+    @POST("delete-notes")
+    Call<DeleteNotes> deleteNotes(@Body DeleteNotes deleteNotes);
+
+    @POST("student-admin-mapping-check")
+    Call<CheckAssignedAdminModel> checkAssignedAdminModel(@Body CheckAssignedAdminModel checkAssignedAdminModel);
+
+    @POST("student-admin-mapping-for-chat")
+    Call<AdminStudentMappingModel> adminStudentMappingModel(@Body AdminStudentMappingModel adminStudentMappingModel);
+
+
+
+
 
 }

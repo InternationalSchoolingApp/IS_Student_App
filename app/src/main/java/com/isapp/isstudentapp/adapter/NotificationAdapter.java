@@ -15,6 +15,9 @@ import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.activity.NotificationViewActivity;
 import com.isapp.isstudentapp.model.NotificationForApp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -36,23 +39,38 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMM dd, yyyy hh:mm aa");
+
+
         String title = list.get(position).getEntityName();
         String message = list.get(position).getMessage();
         String time = list.get(position).getCreatedDate();
 
-        holder.title.setText(title);
-        holder.message.setText(message);
-        holder.time.setText(time);
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), NotificationViewActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("message", message);
-                intent.putExtra("time", time);
-                v.getContext().startActivity(intent);
-            }
-        });
+
+
+        try {
+            Date date = dt.parse(time);
+            String finalDate = dt1.format(date);
+
+            holder.title.setText(title);
+            holder.message.setText(message);
+            holder.time.setText(finalDate);
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), NotificationViewActivity.class);
+                    intent.putExtra("title", title);
+                    intent.putExtra("message", message);
+                    intent.putExtra("time", finalDate);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

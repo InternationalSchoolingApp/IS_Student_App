@@ -60,25 +60,42 @@ public class ScheduleAdapter extends  RecyclerView.Adapter<ScheduleAdapter.Sched
 
         public void setData(ScheduleModel.SchoolCalendar.Event event){
 
+
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat dt1 = new SimpleDateFormat("MMM dd, yyyy hh:mm aa");
+
             String title = event.getTitle();
             String startDate = event.getStart().replace("T", " ");
             String endDate = event.getEnd().replace("T", " ");
 
-            binding.titleSchedule.setText(title);
-            binding.startSchedule.setText(startDate);
-            binding.endSchedule.setText(endDate);
-            binding.scheduleRelativeLayout.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
+            Date  date = null;
+            try {
+                date = dt.parse(startDate);
+                String start = dt1.format(date);
 
-                    Intent intent = new Intent(v.getContext(), ScheduleViewActivity.class);
-                    intent.putExtra("title", title);
-                    intent.putExtra("startDate", startDate);
-                    intent.putExtra("endDate", endDate);
-                    v.getContext().startActivity(intent);
-                }
-            });
+                Date  endDateBefore = dt.parse(endDate);
+                String end = dt1.format(endDateBefore);
+
+                binding.titleSchedule.setText(title);
+                binding.startSchedule.setText(start);
+                binding.endSchedule.setText(end);
+                binding.scheduleRelativeLayout.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(v.getContext(), ScheduleViewActivity.class);
+                        intent.putExtra("title", title);
+                        intent.putExtra("startDate", start);
+                        intent.putExtra("endDate", end);
+                        v.getContext().startActivity(intent);
+                    }
+                });
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
 
 
 

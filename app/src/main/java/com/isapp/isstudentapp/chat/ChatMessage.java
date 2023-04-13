@@ -7,4 +7,5 @@ public class ChatMessage {
     public Date dateObject;
     public String conversionId, conversionName;
     public String teacherName, teacherId, teacherCourse, teacherEmail;
+    public String adminName, adminId, adminEmail;
 }

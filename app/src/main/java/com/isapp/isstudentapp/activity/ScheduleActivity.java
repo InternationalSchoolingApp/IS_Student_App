@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.isapp.isstudentapp.adapter.ScheduleAdapter;
+import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityScheduleBinding;
 import com.isapp.isstudentapp.model.ScheduleModel;
@@ -38,6 +39,9 @@ public class ScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        ColorOfStatusAndNavBar color = new ColorOfStatusAndNavBar();
+        color.loginAndForgetPassword(this);
         binding = ActivityScheduleBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         progressDialog = new ProgressDialog(this);
@@ -55,7 +59,7 @@ public class ScheduleActivity extends AppCompatActivity {
         ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = new Date();
-        ScheduleModel scheduleModel = new ScheduleModel(userId, String.valueOf(simpleDateFormat.format(startDate)), String.valueOf(getNextDate(new Date(), 7, "yyyy-MM-dd")));
+        ScheduleModel scheduleModel = new ScheduleModel(userId, String.valueOf(simpleDateFormat.format(startDate)), String.valueOf(getNextDate(new Date(), 1, "yyyy-MM-dd")));
         Call<ScheduleModel> call = apiInterface.getSchedule(scheduleModel);
         call.enqueue(new Callback<ScheduleModel>() {
             @Override
@@ -66,7 +70,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     ScheduleAdapter scheduleAdapter = new ScheduleAdapter(list);
                     binding.scheduleRecyclerView.setAdapter(scheduleAdapter);
                 } else {
-                    Toast.makeText(ScheduleActivity.this, "No Schedule Activity in 7 next 7 days", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScheduleActivity.this, "No Schedule Activity Today", Toast.LENGTH_SHORT).show();
                 }
             }
 

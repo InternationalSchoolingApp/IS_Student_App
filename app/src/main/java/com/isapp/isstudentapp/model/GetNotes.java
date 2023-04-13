@@ -3,7 +3,6 @@ package com.isapp.isstudentapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class GetNotes {
 
     @SerializedName("message")

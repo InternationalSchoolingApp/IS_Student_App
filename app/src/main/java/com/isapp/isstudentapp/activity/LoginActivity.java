@@ -100,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         binding.loginBtn.setOnClickListener(c -> {
+
+
             check();
         });
     }
@@ -162,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     registerInFirebase(email, name, userIdOnResponse,ssid);
                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     getStatus(status);
                 }

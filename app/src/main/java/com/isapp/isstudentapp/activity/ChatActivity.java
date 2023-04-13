@@ -191,6 +191,7 @@ public class ChatActivity extends BaseActivity {
         if (conversionId == null) {
             checkForConversion();
         }
+
     };
 
     private void listenMessage() {

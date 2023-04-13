@@ -17,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.isapp.isstudentapp.R;
+import com.isapp.isstudentapp.activity.AssignedAdminRecentChat;
 import com.isapp.isstudentapp.activity.RecentChatActivity;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.model.User;
@@ -43,7 +44,40 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         user.id = message.getData().get(Constants.USER_EMAIL);
         user.name = message.getData().get(Constants.NAME);
         user.token = message.getData().get(Constants.FIREBASE_TOKEN);
-        Log.d("MESSAGE COMING", "onMessageReceived: "+ message.getData().get(Constants.KEY_MESSAGE));
+        String channelinmessage = message.getData().get("channel");
+
+        if (channelinmessage.equals("STUDENT_ADMIN")){
+            int notificationId = new Random().nextInt();
+            String channelId = "chat_message";
+
+            Intent intent = new Intent(this, AssignedAdminRecentChat.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
+            builder.setSmallIcon(R.drawable.bellnotify);
+            builder.setContentTitle(user.name);
+            builder.setContentText(message.getData().get(Constants.KEY_MESSAGE));
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message.getData().get(Constants.KEY_MESSAGE)));
+            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            builder.setContentIntent(pendingIntent);
+            builder.setAutoCancel(true);
+
+            CharSequence channelName = "Chat Message";
+            String channelDescription = "This notification channel used for chat message";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+            channel.setDescription(channelDescription);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+            notificationManagerCompat.notify(notificationId, builder.build());
+        }
+
         int notificationId = new Random().nextInt();
         String channelId = "chat_message";
 
