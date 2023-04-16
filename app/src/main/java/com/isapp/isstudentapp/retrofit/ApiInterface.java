@@ -65,6 +65,10 @@ public interface ApiInterface {
     Call<AdminStudentMappingModel> adminStudentMappingModel(@Body AdminStudentMappingModel adminStudentMappingModel);
 
 
+    @POST("app-version-update")
+    Call<AppUpdationCheckModel> appUpdation(@Body AppUpdationCheckModel appUpdationCheckModel);
+
+
 
 
 

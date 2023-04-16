@@ -22,7 +22,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-    String teacherId, teacherName, courseName, teacherEmail;
+    String teacherId, teacherName, courseName;
 
 
     @Override

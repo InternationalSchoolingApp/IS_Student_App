@@ -56,7 +56,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 progressDialog.dismiss();
-                binding.scrollProfile.setVisibility(View.VISIBLE);
                 if (response.body() == null) {
                     Toast.makeText(ProfileActivity.this, "No response", Toast.LENGTH_SHORT).show();
                 } else if (response.body().getStatus().equals("success")) {
@@ -64,14 +63,13 @@ public class ProfileActivity extends AppCompatActivity {
                     url.replace("sch/", "sch/thumb_");
                     Glide.with(ProfileActivity.this).load(url).into(binding.profileImage);
                     binding.gradeTv.setText(response.body().getGradeName());
-                    binding.parentName.setText(response.body().getParentName());
-                    binding.cityTv.setText(response.body().getCityName());
+                    binding.parentName.setText("Parent Name: "+response.body().getParentName());
+                    binding.cityTv.setText("Location: "+response.body().getCityName()+" | "+response.body().getCountryName());
                     binding.nameTv.setText(response.body().getName());
-                    binding.rollNumber.setText(response.body().getRollNumber());
-                    binding.phoneNumber.setText(response.body().getContactNumber());
+                    binding.rollNumber.setText("Roll Number: "+response.body().getRollNumber());
+                    binding.phoneNumber.setText("Phone Number: "+response.body().getContactNumber());
                     binding.email.setText(response.body().getEmail());
-                    binding.addmissionTv.setText(response.body().getAddmissionDate());
-
+                    binding.addmissionTv.setText("Addmission Date: "+response.body().getAddmissionDate());
 
                 }
 

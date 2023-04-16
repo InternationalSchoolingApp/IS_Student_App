@@ -15,8 +15,8 @@
         android:padding="15dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/back"
             app:tint="@color/dash_gif_blue"
             android:layout_alignParentLeft="true"

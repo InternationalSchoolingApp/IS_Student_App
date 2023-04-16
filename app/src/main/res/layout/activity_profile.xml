@@ -15,8 +15,8 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/back"
             android:id="@+id/profile_back_button"
             app:tint="@color/dash_gif_blue" />
@@ -34,17 +34,13 @@
     </RelativeLayout>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scroll_profile"
-        android:background="@drawable/login_background"
-        android:layout_marginTop="20dp">
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/login_background"
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
@@ -100,26 +96,15 @@
                 android:fontFamily="@font/rubik_medium"
                 android:includeFontPadding="false" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/curve_corner"
+                android:orientation="vertical"
+                android:background="@drawable/login_background"
                 android:backgroundTint="@color/white"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rollNumberText"
-                    android:text="Roll Number :"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/dash_gif_blue"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginLeft="10dp"/>
 
                 <TextView
                     android:layout_marginTop="10dp"
@@ -130,29 +115,6 @@
                     android:includeFontPadding="false"
                     android:id="@+id/rollNumber"
                     android:layout_below="@+id/rollNumberText"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginLeft="10dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
-                android:backgroundTint="@color/white"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/addmission_tv_text"
-                    android:includeFontPadding="false"
-                    android:text="Admission Date :"
-                    android:textColor="@color/dash_gif_blue"
-                    android:textSize="18sp"
                     android:fontFamily="@font/rubik_medium"
                     android:layout_marginLeft="10dp"/>
 
@@ -168,29 +130,6 @@
                     android:fontFamily="@font/rubik_medium"
                     android:layout_marginLeft="10dp"/>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
-                android:backgroundTint="@color/white"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contact_text"
-                    android:text="Contact Number :"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/dash_gif_blue"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginLeft="10dp"/>
-
                 <TextView
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
@@ -203,29 +142,7 @@
                     android:fontFamily="@font/rubik_medium"
                     android:layout_marginLeft="10dp"/>
 
-            </RelativeLayout>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
-                android:backgroundTint="@color/white"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="City :"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/location_text"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/dash_gif_blue"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginLeft="10dp"/>
 
                 <TextView
                     android:layout_marginTop="10dp"
@@ -236,30 +153,6 @@
                     android:includeFontPadding="false"
                     android:id="@+id/city_tv"
                     android:layout_below="@+id/location_text"
-                    android:fontFamily="@font/rubik_medium"
-                    android:layout_marginLeft="10dp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
-                android:backgroundTint="@color/white"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp"
-                android:layout_marginBottom="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Parent :"
-                    android:id="@+id/parent_text"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/dash_gif_blue"
-                    android:textSize="18sp"
                     android:fontFamily="@font/rubik_medium"
                     android:layout_marginLeft="10dp"/>
 
@@ -275,13 +168,15 @@
                     android:fontFamily="@font/rubik_medium"
                     android:layout_marginLeft="10dp"/>
 
-            </RelativeLayout>
+            </LinearLayout>
+
+
 
 
         </LinearLayout>
 
 
-    </ScrollView>
+
 
 
 

@@ -17,16 +17,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
             <LinearLayout
                 android:id="@+id/ll_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/login_background"
+                android:background="@drawable/curve_corner_less"
                 android:backgroundTint="@color/is_light_blue"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -41,45 +43,41 @@
                     android:id="@+id/tv_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="3dp"
                     android:fontFamily="@font/rubik"
                     android:includeFontPadding="false"
                     android:textColor="@color/dash_gif_blue"
                     android:textSize="15sp" />
 
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/down_curve"
-                android:backgroundTint="@color/dash_gif_blue"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="25dp">
+                <TextView
+                    android:id="@+id/tv_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/rubik"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/dash_gif_blue"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/your_program_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik"
+                    android:layout_marginTop="3dp"
                     android:includeFontPadding="false"
-                    android:text="Your Learning Program"
-                    android:textColor="@color/white"
+                    android:textColor="@color/dash_gif_blue"
                     android:textFontWeight="10"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/tv_programname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/your_program_text"
-                    android:fontFamily="@font/rubik"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/is_light_blue"
                     android:textSize="15sp" />
 
-            </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
 
 
 
@@ -95,48 +93,35 @@
                     android:layout_marginTop="10dp"
                     android:padding="20dp"
                     app:cardBackgroundColor="@color/dash_gif_blue"
-                    app:cardCornerRadius="30dp"
+                    app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="10dp"
-                            app:loopCount="1"
                             android:elevation="0dp"
-                            android:src="@drawable/performancegif"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="20sp"
-                            android:text="Performance"
-                            android:fontFamily="@font/rubik"
-                            android:includeFontPadding="false"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/is_light_blue"/>
+                            android:src="@drawable/performancegif"
+                            app:loopCount="2" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
-                            android:textSize="10sp"
-                            android:text="Check your progress Subject wise"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
                             android:fontFamily="@font/rubik"
                             android:includeFontPadding="false"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="15dp"
-                            android:textColor="@color/white"/>
-
-
-
+                            android:text="My Performance"
+                            android:textColor="@color/is_light_blue"
+                            android:textSize="20sp" />
 
 
                     </LinearLayout>
@@ -156,7 +141,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="20dp"
                     app:cardBackgroundColor="@color/dash_gif_blue"
-                    app:cardCornerRadius="30dp"
+                    app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
                     <LinearLayout
@@ -202,7 +187,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="20dp"
                     app:cardBackgroundColor="@color/dash_gif_blue"
-                    app:cardCornerRadius="30dp"
+                    app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
                     <LinearLayout
@@ -216,7 +201,7 @@
                             android:layout_marginVertical="10dp"
                             android:layout_marginLeft="20dp"
                             android:elevation="0dp"
-                            android:src="@drawable/ic_baseline_note_alt_24"
+                            android:src="@drawable/baseline_calendar_month_24"
                             app:loopCount="1" />
 
                         <TextView

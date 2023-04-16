@@ -1,36 +1,41 @@
 package com.isapp.isstudentapp.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
+import com.isapp.isstudentapp.databinding.ActivityDashboardBinding;
 import com.isapp.isstudentapp.fragment.ChatFragment;
 import com.isapp.isstudentapp.fragment.DashboardFragment;
-import com.isapp.isstudentapp.R;
-import com.isapp.isstudentapp.databinding.ActivityDashboardBinding;
 import com.isapp.isstudentapp.fragment.MoreFragment;
+import com.isapp.isstudentapp.model.AppUpdationCheckModel;
 import com.isapp.isstudentapp.model.DashboardNotificationModel;
 import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import java.time.LocalTime;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,10 +47,20 @@ public class DashboardActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     PreferenceManager preferenceManager;
-    FirebaseFirestore firebaseFirestore;
+
+
     Animation slide_up;
     long pressedTime;
+
+
+    String version, versionCode;
+
     NetworkChangeListener networkChangeListner = new NetworkChangeListener();
+
+
+    String message;
+
+    Dialog dialog, wishes;
 
 
     @Override
@@ -55,11 +70,15 @@ public class DashboardActivity extends AppCompatActivity {
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
+        updation();
+        getPopUpWishes();
+
+
+
         binding.notificationBell.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, NotificationActivity.class);
             startActivity(intent);
         });
-        updateFireBaseToken();
         binding.bottomNavMenu.setItemSelected(R.id.nav_dashboard, true);
         getNotificationCount();
         getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), new DashboardFragment()).commit();
@@ -67,14 +86,47 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-    private void updateFireBaseToken() {
-        DocumentReference docRef = firebaseFirestore.collection(Constants.FIREBASE_USER_DB).document(preferenceManager.getString(Constants.USER_EMAIL));
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                docRef.update("firebaseToken", preferenceManager.getString(Constants.FIREBASE_TOKEN));
-            }
+    private void getPopUp() {
+
+        dialog.show();
+        androidx.appcompat.widget.AppCompatButton button, btnClose;
+        btnClose = dialog.findViewById(R.id.btn_notNow);
+        btnClose.setOnClickListener(v->{
+            dialog.dismiss();
         });
+
+    }
+
+    private void getPopUpWishes() {
+        LocalTime time = LocalTime.now(); // Get the current time
+        int hour = time.getHour(); // Get the hour from the current time
+
+
+        if (hour >= 6 && hour < 12) {
+            message ="Good morning!";
+        } else if (hour >= 12 && hour < 18) {
+            message = "Good afternoon!";
+        } else {
+            message = "Good evening!";
+        }
+
+
+        wishes.show();
+        TextView name, wish;
+        name = wishes.findViewById(R.id.oops_text);
+        wish = wishes.findViewById(R.id.network_issue_body);
+
+
+        name.setText("Hi, "+preferenceManager.getString(Constants.NAME));
+        wish.setText(message);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wishes.dismiss();
+            }
+        }, 3000);
+
 
     }
 
@@ -116,7 +168,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void init() {
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.check_app_update);
+        wishes = new Dialog(this);
+        wishes.setContentView(R.layout.good_status_pop_up);
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setCancelable(false);
@@ -165,6 +220,46 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public void updation(){
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = pInfo.versionName;
+            // versionCode = String.valueOf(pInfo.versionCode);
+            Log.d("App Version", "Version Name: " + version + " Version Code: " + versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        AppUpdationCheckModel.Authentication authentication = new AppUpdationCheckModel.Authentication("r5HmaHsWDXPLCX5Zfog9",String.valueOf(preferenceManager.getInt(Constants.USER_ID)),"");
+        AppUpdationCheckModel.RequestData requestData = new AppUpdationCheckModel.RequestData(version);
+        AppUpdationCheckModel app = new AppUpdationCheckModel(authentication, requestData);
+        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
+        Call<AppUpdationCheckModel> call = apiInterface.appUpdation(app);
+        call.enqueue(new Callback<AppUpdationCheckModel>() {
+            @Override
+            public void onResponse(Call<AppUpdationCheckModel> call, Response<AppUpdationCheckModel> response) {
+                Log.d("IN_RESPONSE" , "RESPONSE");
+                String status  =  response.body().getStatusResponse().getStatus();
+                if (status.equals("SUCCESS")){
+                    Log.d("GETTING_RESPONSE" , "SUCCESS");
+                    if (response.body().getAppversionUpdateResponse().getVersionUpdateStatus().equals("Y")){
+                        getPopUp();
+                        Log.d("UPDATE_RESPONSE" , response.body().getAppversionUpdateResponse().getVersionUpdateStatus());
+                    }
+                } else if (status.equals("FAILED")){
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AppUpdationCheckModel> call, Throwable t) {
+                Log.d("RESPONSE_FAILED" , "FAILED");
+            }
+        });
     }
 
     private void changeImage(Integer i) {

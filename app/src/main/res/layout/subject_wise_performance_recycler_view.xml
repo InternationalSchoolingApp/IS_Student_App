@@ -29,7 +29,7 @@
                 android:fontFamily="@font/rubik"
                 android:includeFontPadding="false"
                 android:textColor="@color/dash_gif_blue"
-                android:text="SubjectName"
+                android:text="Course Name"
                 android:textSize="15sp" />
 
             <TextView

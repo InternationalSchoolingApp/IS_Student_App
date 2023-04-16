@@ -27,23 +27,21 @@
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/scroll_login_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/login_background">
+
 
         <LinearLayout
+            android:id="@+id/scroll_login_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/login_background"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="220dp"
+                android:layout_width="150dp"
                 android:layout_height="65dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-
                 android:src="@drawable/whitelogo" />
 
             <TextView
@@ -64,20 +62,11 @@
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/rubik_medium"
                 android:includeFontPadding="false"
-                android:text="Login"
+                android:text="Login to continue"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="40sp" />
+                android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/rubik"
-                android:includeFontPadding="false"
-                android:text="to continue"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username"
@@ -90,10 +79,11 @@
                 android:transitionName="user_name"
                 app:boxBackgroundColor="@color/white"
                 app:boxCollapsedPaddingTop="5dp"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+
+                app:boxCornerRadiusTopStart="5dp"
                 app:boxStrokeColor="@color/is_light_blue"
                 app:boxStrokeErrorColor="@color/design_default_color_error"
                 app:boxStrokeWidth="2dp"
@@ -120,10 +110,11 @@
                 android:hint="Password"
                 android:includeFontPadding="false"
                 app:boxBackgroundColor="@color/white"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
+                app:boxCollapsedPaddingTop="5dp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
                 app:boxStrokeColor="@color/is_light_blue"
                 app:boxStrokeWidth="2dp"
                 app:helperTextTextColor="@color/design_default_color_error"
@@ -140,51 +131,125 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/login_btn"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
-                android:backgroundTint="@color/is_dark_blue"
-                android:fontFamily="@font/rubik"
-                android:includeFontPadding="false"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="Login"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:transitionName="login_forget" />
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp">
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_light"
-                    android:text="Forgot Password ? "
-                    android:textColor="@color/white"
-                    android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/forget_btn"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/login_btn"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/curve_corner_less"
+                    android:backgroundTint="@color/is_dark_blue"
                     android:fontFamily="@font/rubik"
-                    android:text="Click here to reset"
-                    android:textColor="#ff0000"
-                    android:textStyle="bold" />
+                    android:includeFontPadding="false"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:text="Login"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:transitionName="login_forget" />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_light"
+                        android:textSize="12sp"
+                        android:text="Forgot Password? "
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:textSize="12sp"
+                        android:id="@+id/forget_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik"
+                        android:text="Reset Here"
+                        android:textColor="#ff0000"
+                        android:textStyle="bold" />
+
+
+
+
+
             </LinearLayout>
+
+
+
+
+
+
+
+
+
 
 
         </LinearLayout>
 
-    </ScrollView>
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/copyright"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy"
+            android:autoLink="web"
+            android:id="@+id/privacy"
+            android:fontFamily="@font/rubik"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" &amp; "
+            android:fontFamily="@font/rubik"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_error"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms of use"
+            android:autoLink="web"
+            android:id="@+id/terms_of_use"
+            android:fontFamily="@font/rubik"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/copyright"
+        android:layout_height="wrap_content"
+        android:text="Copyright © 2023 - International Schooling"
+        android:fontFamily="@font/rubik"
+        android:textAlignment="center"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.isapp.isstudentapp.activity.DashboardActivity;
+import com.isapp.isstudentapp.activity.LoginActivity;
 import com.isapp.isstudentapp.activity.ProfileActivity;
 import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.activity.NotesActivity;
 import com.isapp.isstudentapp.activity.PerformanceActivity;
 import com.isapp.isstudentapp.activity.ScheduleActivity;
+import com.isapp.isstudentapp.activity.SplashActivity;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.model.DashBoardModel;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
+
+import java.time.LocalTime;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +39,7 @@ public class DashboardFragment extends Fragment {
 
     ProgressDialog progressDialog;
     PreferenceManager preferenceManager;
-    TextView name, grade, program;
+    TextView name, grade, program, city ;
     LinearLayout ll_profile;
     RelativeLayout performance, myNotes, schedule ;
 
@@ -61,8 +67,18 @@ public class DashboardFragment extends Fragment {
         preferenceManager = new PreferenceManager(getContext());
         name = view.findViewById(R.id.tv_name);
         grade = view.findViewById(R.id.tv_grade);
-        program = view.findViewById(R.id.tv_programname);
+        program = view.findViewById(R.id.your_program_text);
         myNotes = view.findViewById(R.id.dashboard_notes);
+        city = view.findViewById(R.id.tv_city);
+
+
+
+
+
+
+
+
+
         myNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +101,7 @@ public class DashboardFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PerformanceActivity.class);
                 startActivity(intent);
+
             }
         });
         ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
@@ -98,7 +115,11 @@ public class DashboardFragment extends Fragment {
                     String regTypeName = response.body().getRegType().replace("_", " ");
                     name.setText("Hi, " + response.body().getfName());
                     grade.setText(response.body().getGradeName());
-                    program.setText(regTypeName);
+                    city.setText("Location : "+response.body().getCity() +" | "+response.body().getCountry());
+                    program.setText("Enrollment Type : " +regTypeName);
+
+
+
 
                 } else {
                     progressDialog.dismiss();

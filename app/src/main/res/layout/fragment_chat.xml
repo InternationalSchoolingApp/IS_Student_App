@@ -7,27 +7,17 @@
     android:backgroundTint="@color/white"
     tools:context=".fragment.ChatFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chat"
-        android:id="@+id/chat_text"
-        android:fontFamily="@font/rubik_medium"
-        android:textColor="@color/dash_gif_blue"
-        android:textSize="40sp"
-        android:includeFontPadding="false"
-        android:layout_margin="15dp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chat_text"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/teacher_row"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/curve_corner"
+        android:background="@drawable/curve_corner_less"
         android:backgroundTint="@color/is_light_blue"
         android:padding="15dp">
 
@@ -53,12 +43,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/admin_row"
         android:layout_marginEnd="10dp"
         android:layout_below="@+id/teacher_row"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/curve_corner"
+        android:background="@drawable/curve_corner_less"
         android:backgroundTint="@color/is_light_blue"
         android:padding="15dp">
 
@@ -68,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/rubik_medium"
-            android:text="Chat With Your Admin"
+            android:text="Chat With School Admin"
             android:textSize="15sp" />
     </RelativeLayout>
 

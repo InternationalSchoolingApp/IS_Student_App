@@ -1,23 +1,24 @@
 package com.isapp.isstudentapp.adapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.isapp.isstudentapp.activity.ChatActivity;
+import com.isapp.isstudentapp.activity.ChatAdminActivity;
 import com.isapp.isstudentapp.chat.ChatMessage;
 import com.isapp.isstudentapp.databinding.TeacherRecentConversationBinding;
 
 import java.util.List;
 
-public class RecentConversionAdapter extends RecyclerView.Adapter<RecentConversionAdapter.ConversionViewHolder> {
+public class RecentConversationAdminAdapter extends RecyclerView.Adapter<RecentConversationAdminAdapter.ConversionViewHolder> {
+
     private final List<ChatMessage> chatMessages;
 
-    public RecentConversionAdapter(List<ChatMessage> chatMessages) {
+    public RecentConversationAdminAdapter(List<ChatMessage> chatMessages) {
         this.chatMessages = chatMessages;
     }
 
@@ -30,7 +31,6 @@ public class RecentConversionAdapter extends RecyclerView.Adapter<RecentConversi
     @Override
     public void onBindViewHolder(@NonNull ConversionViewHolder holder, int position) {
         holder.setData(chatMessages.get(position));
-
     }
 
     @Override
@@ -47,27 +47,22 @@ public class RecentConversionAdapter extends RecyclerView.Adapter<RecentConversi
         }
 
         void setData(ChatMessage chatMessage) {
-            binding.recentTeacherNameChat.setText(chatMessage.conversionName);
+            binding.recentTeacherNameChat.setText("School Admin");
             binding.teacherRecentMessage.setText(chatMessage.message);
             binding.timeRecentMessage.setText(chatMessage.dateObject.toString());
-            String teacherId = chatMessage.teacherId;
-            String teacherName = chatMessage.conversionName;
-            String teacherEmail = chatMessage.teacherEmail;
-            String teacherSubject = chatMessage.teacherCourse;
-
-
+            String studentId = chatMessage.adminId;
+            String studentName = chatMessage.adminName;
+            String studentEmail = chatMessage.adminEmail;
 
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                                                      @Override
                                                      public void onClick(View v) {
 
-                                                         Intent intent = new Intent(v.getContext(), ChatActivity.class);
-                                                         intent.putExtra("teacherId", teacherId);
-                                                         intent.putExtra("teacherName", teacherName);
-                                                         intent.putExtra("subjectName", teacherSubject);
-                                                         intent.putExtra("teacherEmail",teacherEmail);
+                                                         Intent intent = new Intent(v.getContext(), ChatAdminActivity.class);
+                                                         intent.putExtra("adminUserId", studentId);
+                                                         intent.putExtra("name", studentName);
+                                                         intent.putExtra("email", studentEmail);
                                                          v.getContext().startActivity(intent);
-                                                         ((Activity) v.getContext()).finish();
 
                                                      }
                                                  }

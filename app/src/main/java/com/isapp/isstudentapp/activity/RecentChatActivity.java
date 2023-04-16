@@ -3,7 +3,6 @@ package com.isapp.isstudentapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -15,7 +14,6 @@ import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityRecentChatBinding;
 import com.isapp.isstudentapp.preference.PreferenceManager;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +54,7 @@ public class RecentChatActivity extends BaseActivity {
         binding.startChatBtn.setOnClickListener(v -> {
             Intent i = new Intent(RecentChatActivity.this, AssignedTeachersActivity.class);
             startActivity(i);
+            finish();
         });
         binding.recentTeacherBackButton.setOnClickListener(v -> onBackPressed());
 

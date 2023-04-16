@@ -42,6 +42,8 @@ public class PerformanceByGradeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         init();
 
+        binding.profileBackButton.setOnClickListener(v->onBackPressed());
+
         Bundle extra = getIntent().getExtras();
         Integer userId = preferenceManager.getInt(Constants.USER_ID);
         String courseId = "";
@@ -101,7 +103,7 @@ public class PerformanceByGradeActivity extends AppCompatActivity {
                         binding.submittedBeforeTime.setText("Submitted Before Time : " + response.body().getSubmitBeforeTimeAssign().intValue());
                         binding.submittedOnTime.setText("Submitted On Time : " + response.body().getSubmitOntimeAssign().intValue());
                         binding.submittedLate.setText("Submitted Late : " + response.body().getSubmitLateAssign().intValue());
-                        binding.nameOfSubjectPerformance.setText("Subject :\n" + response.body().getResponse().getEnrollments().getEnrollment().get(0).getEntity().getTitle());
+                        binding.nameOfSubjectPerformance.setText("Course :\n" + response.body().getResponse().getEnrollments().getEnrollment().get(0).getEntity().getTitle());
                         binding.currentOverallScore.setText("Overall Score : " + response.body().getResponse().getEnrollments().getEnrollment().get(0).getGrades().getAchieved());
                         binding.overallGrade.setText("Overall Grade : " + response.body().getResponse().getEnrollments().getEnrollment().get(0).getGrades().getLetter());
                         binding.dateView.setText("Duration : " + response.body().getResponse().getEnrollments().getEnrollment().get(0).getStartdate() + "-" + response.body().getResponse().getEnrollments().getEnrollment().get(0).getEnddate());

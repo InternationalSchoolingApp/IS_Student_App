@@ -41,8 +41,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="220dp"
+                android:layout_width="150dp"
                 android:layout_height="65dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/whitelogo" />
 
@@ -64,19 +65,10 @@
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/rubik_bold"
                 android:includeFontPadding="false"
-                android:text="Enter Mail"
+                android:text="Enter Mail to get reset link"
                 android:textColor="@color/white"
-                android:textSize="40sp" />
+                android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/rubik_light"
-                android:includeFontPadding="false"
-                android:text="to get reset link"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/forget_email_tv"
@@ -89,10 +81,10 @@
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/is_light_blue"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusBottomEnd="20dp"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
                 app:hintTextColor="@color/black"
@@ -114,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/curve_corner"
+                android:background="@drawable/curve_corner_less"
                 android:backgroundTint="@color/is_light_blue"
                 android:includeFontPadding="false"
                 android:paddingLeft="30dp"

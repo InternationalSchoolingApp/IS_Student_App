@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -155,7 +154,6 @@ public class ChatActivity extends BaseActivity {
                 sendNotification(body.toString());
 
             }catch ( Exception exception){
-                showToast(exception.toString());
             }
         }
         binding.chatEdittext.setText(null);
@@ -206,7 +204,13 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void setListeners() {
-        binding.backButtonChat.setOnClickListener(c -> onBackPressed());
+        binding.backButtonChat.setOnClickListener(c -> {
+
+            Intent intent = new Intent(ChatActivity.this, RecentChatActivity.class);
+            startActivity(intent);
+            finish();
+
+        });
         binding.sendButtonChat.setOnClickListener(v -> {
             if (!binding.chatEdittext.getText().toString().equals("")) {
                 sendMessage();
@@ -246,7 +250,7 @@ public class ChatActivity extends BaseActivity {
     private void addConversion(HashMap<String, Object> conversion) {
         CollectionReference conversation = database.collection(Constants.KEY_COLLECTIONS_CONVERSATION);
         conversation.document(""+preferenceManager.getString(Constants.USER_EMAIL).toLowerCase()+" - "+teacherEmail.toLowerCase()).set(conversion).addOnSuccessListener(documentReference -> conversionId = (""+preferenceManager.getString(Constants.USER_EMAIL).toLowerCase()+" - "+teacherEmail.toLowerCase())).addOnFailureListener(exception->{
-            Toast.makeText(this, "Nt updates", Toast.LENGTH_SHORT).show();
+
         });
 
     }
@@ -314,9 +318,7 @@ public class ChatActivity extends BaseActivity {
         listenAvailabilityOfReceiver();
     }
 
-    public void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
+
 
     private void sendNotification(String messageBody) {
 
@@ -331,23 +333,19 @@ public class ChatActivity extends BaseActivity {
                             JSONArray results = responseJson.getJSONArray("results");
                             if (responseJson.getInt("failure") == 1) {
                                 JSONObject error = (JSONObject) results.get(0);
-                                showToast(error.getString("error"));
                                 return;
                             }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    showToast("Notification Sent");
                 } else {
-                    showToast("Error :" + response.code());
                 }
             }
 
 
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                showToast(t.getMessage());
             }
         });
 

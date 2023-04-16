@@ -14,8 +14,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
 import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.activity.AssignedAdminRecentChat;
 import com.isapp.isstudentapp.activity.RecentChatActivity;
@@ -29,13 +35,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private PreferenceManager preferenceManager;
 
+    FirebaseFirestore firebaseFirestore;
+
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
+        firebaseFirestore = FirebaseFirestore.getInstance();
         preferenceManager = new PreferenceManager(getApplicationContext());
-        preferenceManager.putString(Constants.FIREBASE_TOKEN, token);
-        Log.d("TOKEN", "onNewToken: "+ token);
+
+        updateFireBaseToken(token);
     }
+
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
@@ -46,7 +56,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         user.token = message.getData().get(Constants.FIREBASE_TOKEN);
         String channelinmessage = message.getData().get("channel");
 
-        if (channelinmessage.equals("STUDENT_ADMIN")){
+        if (channelinmessage.equals("STUDENT_ADMIN")) {
             int notificationId = new Random().nextInt();
             String channelId = "chat_message";
 
@@ -88,7 +98,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         builder.setSmallIcon(R.drawable.islogomipmap);
         builder.setContentTitle(user.name);
         builder.setContentText(message.getData().get(Constants.KEY_MESSAGE));
-        Log.d("MESSAGE COMING", "onMessageReceived: "+ message.getData().get(Constants.KEY_MESSAGE));
+        Log.d("MESSAGE COMING", "onMessageReceived: " + message.getData().get(Constants.KEY_MESSAGE));
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message.getData().get(Constants.KEY_MESSAGE)));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setContentIntent(pendingIntent);
@@ -106,18 +116,29 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         notificationManagerCompat.notify(notificationId, builder.build());
 
     }
 
+    private void updateFireBaseToken(String token) {
 
+        if (token != null && !token.equals("") ){
+            preferenceManager.putString(Constants.FIREBASE_TOKEN, token);
+            DocumentReference docRef = firebaseFirestore.collection(Constants.FIREBASE_USER_DB).document(token);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    docRef.update("firebaseToken", preferenceManager.getString(Constants.FIREBASE_TOKEN));
+                }
+            });
+        }
+
+
+
+
+
+    }
 }

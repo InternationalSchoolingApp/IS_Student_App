@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/is_light_blue"
-    android:theme="@style/AppTheme"
-    tools:context=".activity.ChatActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:theme="@style/ThemeOverlay.ISStudentApp.FullscreenContainer"
+    tools:context=".activity.ChatAdminActivity">
 
     <View
         android:id="@+id/view_background"
@@ -49,9 +49,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back_button_chat"
-        android:layout_width="20dp"
+        android:layout_width="30dp"
         app:tint="@color/black"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_margin="15dp"
         android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +64,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="15dp"
+        android:visibility="gone"
         app:tint="@color/black"
         android:src="@drawable/ic_baseline_info_24"
         android:tint="@color/black"

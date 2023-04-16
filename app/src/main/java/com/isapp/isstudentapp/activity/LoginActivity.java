@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
     private String model;
     //progressDialog
     ProgressDialog progressDialog;
+
+    TextView privacy, terms;
     //back
     private long pressedTime;
     //pattern
@@ -77,6 +80,8 @@ public class LoginActivity extends AppCompatActivity {
     private void init() {
         ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
         colorOfStatusAndNavBar.loginAndForgetPassword(this);
+        privacy = findViewById(R.id.privacy);
+        terms = findViewById(R.id.terms_of_use);
         progressDialog = new ProgressDialog(this);
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.pop_up_dialog);
@@ -100,9 +105,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         binding.loginBtn.setOnClickListener(c -> {
-
-
             check();
+        });
+        binding.privacy.setOnClickListener(v->{
+            String url = "https://internationalschooling.org/privacy-policy/";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        });
+
+        binding.termsOfUse.setOnClickListener(v->{
+            String url = "https://internationalschooling.org/terms-of-use/";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
         });
     }
 

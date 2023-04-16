@@ -10,6 +10,19 @@ public class UserProfile {
     private String gradeName;
     @SerializedName("parentName")
     private String parentName;
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    @SerializedName("countryName")
+    private String countryName;
+
+
     @SerializedName("cityName")
     private String cityName;
     @SerializedName("name")
