@@ -36,25 +36,16 @@ public class ScheduleViewActivity extends AppCompatActivity {
             startDate = extra.getString("startDate");
             endDate = extra.getString("endDate");
         }
-        Date date ;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        Toast.makeText(this, date.toString(), Toast.LENGTH_SHORT).show();
+
+
         binding.title.setText(title);
         binding.startDate.setText(startDate);
         binding.endDate.setText(endDate);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
         binding.teacherProfileBackButton.setOnClickListener(v->onBackPressed());
-        binding.buttonAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ScheduleViewActivity.this, "Working On This", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
+
 
 
 }

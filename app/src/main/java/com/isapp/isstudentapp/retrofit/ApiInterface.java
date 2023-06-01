@@ -68,6 +68,9 @@ public interface ApiInterface {
     @POST("app-version-update")
     Call<AppUpdationCheckModel> appUpdation(@Body AppUpdationCheckModel appUpdationCheckModel);
 
+    @POST("user-status")
+    Call<Status> getUserStatus(@Body Status appUpdationCheckModel);
+
 
 
 

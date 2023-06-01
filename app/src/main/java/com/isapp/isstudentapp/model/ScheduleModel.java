@@ -22,6 +22,19 @@ public class ScheduleModel {
     @Expose
     private String startDate;
 
+    @Override
+    public String toString() {
+        return "ScheduleModel{" +
+                "status='" + status + '\'' +
+                ", userId=" + userId +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", statusCode='" + statusCode + '\'' +
+                ", message='" + message + '\'' +
+                ", schoolCalendar=" + schoolCalendar +
+                '}';
+    }
+
     @SerializedName("endDate")
     @Expose
     private String endDate;

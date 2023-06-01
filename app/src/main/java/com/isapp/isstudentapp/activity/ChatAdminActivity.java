@@ -1,10 +1,12 @@
 package com.isapp.isstudentapp.activity;
 
+import android.app.ProgressDialog;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +26,12 @@ import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityChatAdminBinding;
 import com.isapp.isstudentapp.fcmApi.FcmApiClient;
 import com.isapp.isstudentapp.fcmApi.FcmApiInterface;
+import com.isapp.isstudentapp.model.AdminStudentMappingModel;
+import com.isapp.isstudentapp.model.CheckAssignedAdminModel;
 import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
+import com.isapp.isstudentapp.retrofit.ApiInterface;
+import com.isapp.isstudentapp.retrofit.RetroFitClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,8 +57,13 @@ public class ChatAdminActivity extends AppCompatActivity {
     NetworkChangeListener networkChangeListner = new NetworkChangeListener();
     private List<ChatMessage> chatMessages;
     private ChatAdapter chatAdapter;
+
+    ProgressDialog progressDialog;
     private FirebaseFirestore database;
     private PreferenceManager preferenceManager;
+
+    Integer userId;
+
     private String adminName, adminEmail, adminUserId, senderId, recieverFcmToken;
     private String conversionId = null;
     private Boolean online = false;
@@ -66,18 +77,9 @@ public class ChatAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
-        colorOfStatusAndNavBar.chat(this);
-
-        Bundle extra = getIntent().getExtras();
-        if (extra != null) {
-            adminUserId = extra.getString("adminUserId");
-            adminEmail = extra.getString("email").toLowerCase();
-            adminName = extra.getString("name");
-        }
-
-        binding.chatScreenTeacherName.setText("School Admin");
-
+        colorOfStatusAndNavBar.colorOfStatusBar(this);
         init();
+        getAdmin();
         setListeners();
         listenMessage();
 
@@ -92,11 +94,44 @@ public class ChatAdminActivity extends AppCompatActivity {
         });
     }
 
-    void init() {
 
+
+
+    void assignAdmin(){
+        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
+        AdminStudentMappingModel adminStudentMappingModel = new AdminStudentMappingModel(userId);
+        Call<AdminStudentMappingModel> call = apiInterface.adminStudentMappingModel(adminStudentMappingModel);
+        call.enqueue(new Callback<AdminStudentMappingModel>() {
+            @Override
+            public void onResponse(Call<AdminStudentMappingModel> call, Response<AdminStudentMappingModel> response) {
+                if(response.body().getStatus().equals("success")){
+                    progressDialog.dismiss();
+                    finish();
+                    startActivity(getIntent());
+                }else{
+                    progressDialog.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AdminStudentMappingModel> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    void init() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.setMessage("Loading");
+        progressDialog.setCancelable(false);
         preferenceManager = new PreferenceManager(getApplicationContext());
+        userId= preferenceManager.getInt(Constants.USER_ID);
         senderId = preferenceManager.getString(Constants.USER_EMAIL);
-        binding.chatScreenTeacherName.setText(adminName);
+        binding.chatScreenTeacherName.setText("School Admin");
         chatMessages = new ArrayList<>();
         chatAdapter = new ChatAdapter(chatMessages, senderId);
         database = FirebaseFirestore.getInstance();
@@ -113,6 +148,30 @@ public class ChatAdminActivity extends AppCompatActivity {
         message.put("timeStamp", new Date());
         message.put("type", "ADMIN_STUDENT");
         database.collection(Constants.KEY_COLLECTION_CHAT_ADMIN).add(message);
+        if(!online){
+            try{
+
+                JSONArray tokens = new JSONArray();
+                tokens.put(recieverFcmToken);
+
+                JSONObject data = new JSONObject();
+                data.put(Constants.USER_EMAIL, preferenceManager.getString(Constants.USER_EMAIL));
+                data.put(Constants.NAME, "School Admin");
+                data.put(Constants.FIREBASE_TOKEN, preferenceManager.getString(Constants.FIREBASE_TOKEN));
+                data.put(Constants.KEY_MESSAGE, binding.chatEdittext.getText().toString());
+                data.put("channel", "STUDENT_ADMIN");
+
+                JSONObject body = new JSONObject();
+                body.put(Constants.REMOTE_MESSAGE_DATA, data);
+                body.put(Constants.REGISTRATION_IDS, tokens);
+
+                sendNotification(body.toString());
+
+            }catch ( Exception exception){
+
+            }
+        }
+
         if (conversionId != null) {
             updateConversion(binding.chatEdittext.getText().toString());
         } else {
@@ -129,30 +188,7 @@ public class ChatAdminActivity extends AppCompatActivity {
             conversion.put(Constants.KEY_TIME_STAMP, new Date());
             addConversion(conversion);
         }
-        if(!online){
-            try{
-
-                JSONArray tokens = new JSONArray();
-                tokens.put(recieverFcmToken);
-
-                JSONObject data = new JSONObject();
-                data.put(Constants.USER_EMAIL, preferenceManager.getString(Constants.USER_EMAIL));
-                data.put(Constants.NAME, preferenceManager.getString(Constants.NAME));
-                data.put(Constants.FIREBASE_TOKEN, preferenceManager.getString(Constants.FIREBASE_TOKEN));
-                data.put(Constants.KEY_MESSAGE, binding.chatEdittext.getText().toString());
-                data.put("channel", "STUDENT_ADMIN");
-
-                JSONObject body = new JSONObject();
-                body.put(Constants.REMOTE_MESSAGE_DATA, data);
-                body.put(Constants.REGISTRATION_IDS, tokens);
-
-                sendNotification(body.toString());
-
-            }catch ( Exception exception){
-
-            }
-        }
-        binding.chatEdittext.setText(null);
+                binding.chatEdittext.setText(null);
     }
 
     private void listenAvailabilityOfReceiver() {
@@ -319,5 +355,33 @@ public class ChatAdminActivity extends AppCompatActivity {
     protected void onStop() {
         unregisterReceiver(networkChangeListner);
         super.onStop();
+    }
+
+    private void getAdmin() {
+
+        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
+        CheckAssignedAdminModel checkAssignedAdminModel = new CheckAssignedAdminModel(userId);
+        Call<CheckAssignedAdminModel> call = apiInterface.checkAssignedAdminModel(checkAssignedAdminModel);
+        call.enqueue(new Callback<CheckAssignedAdminModel>() {
+            @Override
+            public void onResponse(Call<CheckAssignedAdminModel> call, Response<CheckAssignedAdminModel> response) {
+                if (response.body().getStatus().equals("success")){
+                    assignAdmin();
+                    progressDialog.dismiss();
+                }else{
+                    adminUserId = String.valueOf(response.body().getAdminId());
+                    adminEmail = response.body().getAdminEmail();
+                    adminName = response.body().getAdminName();
+                    progressDialog.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CheckAssignedAdminModel> call, Throwable t) {
+
+            }
+        });
+
     }
 }

@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
+import com.isapp.isstudentapp.common.LogoutDone;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityDashboardBinding;
 import com.isapp.isstudentapp.fragment.ChatFragment;
@@ -29,6 +30,7 @@ import com.isapp.isstudentapp.fragment.DashboardFragment;
 import com.isapp.isstudentapp.fragment.MoreFragment;
 import com.isapp.isstudentapp.model.AppUpdationCheckModel;
 import com.isapp.isstudentapp.model.DashboardNotificationModel;
+import com.isapp.isstudentapp.model.Status;
 import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
@@ -70,6 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
+        getStatus();
         updation();
         getPopUpWishes();
 
@@ -83,6 +86,28 @@ public class DashboardActivity extends AppCompatActivity {
         getNotificationCount();
         getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), new DashboardFragment()).commit();
         bottomMenu();
+
+    }
+
+    private void getStatus() {
+
+        Integer userId = preferenceManager.getInt(Constants.USER_ID);
+        Status status = new Status(userId);
+        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
+        Call<Status> call = apiInterface.getUserStatus(status);
+        call.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if (!response.body().getStatus().equals("success")){
+                    LogoutDone logoutDone = new LogoutDone();
+                    logoutDone.logout(preferenceManager.getInt(Constants.PLATFORM_ID), userId, preferenceManager.getString(Constants.USER_EMAIL));
+                }            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+
+            }
+        });
 
     }
 

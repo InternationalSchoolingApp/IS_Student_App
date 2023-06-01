@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityAssignedTeachersBinding;
 import com.isapp.isstudentapp.model.AssignTeacherModel;
+import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
@@ -75,5 +78,20 @@ public class AssignedTeachersActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
+    }
+
+    NetworkChangeListener networkChangeListner = new NetworkChangeListener();
 
 }

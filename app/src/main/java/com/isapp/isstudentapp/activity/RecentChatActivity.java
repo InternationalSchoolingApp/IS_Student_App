@@ -1,6 +1,8 @@
 package com.isapp.isstudentapp.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import com.google.firebase.firestore.DocumentChange;
@@ -13,6 +15,7 @@ import com.isapp.isstudentapp.common.BaseActivity;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityRecentChatBinding;
+import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +39,6 @@ public class RecentChatActivity extends BaseActivity {
         init();
         listenConversations();
         setListeners();
-
     }
 
     private void init() {
@@ -61,8 +63,6 @@ public class RecentChatActivity extends BaseActivity {
     }
 
     private void listenConversations(){
-
-
         firebaseFirestore.collection(Constants.KEY_COLLECTIONS_CONVERSATION)
                 .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.USER_EMAIL).toLowerCase())
                 .addSnapshotListener(eventListener);
@@ -70,7 +70,6 @@ public class RecentChatActivity extends BaseActivity {
                 .whereEqualTo(Constants.KEY_RECIEVER_ID, preferenceManager.getString(Constants.USER_EMAIL).toLowerCase())
                 .addSnapshotListener(eventListener);
     }
-
 
     private EventListener<QuerySnapshot> eventListener = (value , error) ->{
         if(error!=null){
@@ -121,6 +120,21 @@ public class RecentChatActivity extends BaseActivity {
 
         }
     };
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
+    }
+
+    NetworkChangeListener networkChangeListner = new NetworkChangeListener();
 
 
 }

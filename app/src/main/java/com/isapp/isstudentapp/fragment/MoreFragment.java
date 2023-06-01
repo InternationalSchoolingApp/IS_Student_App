@@ -20,6 +20,7 @@ import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.activity.LoginActivity;
 import com.isapp.isstudentapp.activity.NotesActivity;
 import com.isapp.isstudentapp.activity.PerformanceActivity;
+import com.isapp.isstudentapp.activity.SplashActivity;
 import com.isapp.isstudentapp.common.LogoutDone;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.model.UserProfile;
@@ -38,6 +39,7 @@ PreferenceManager preferenceManager ;
     ImageView imageView;
     TextView name, grade;
     Button button_log, btn_perf, btn_notes, btn_view_profile;
+    String firebaseToken;
 
     @Nullable
     @Override
@@ -65,13 +67,16 @@ PreferenceManager preferenceManager ;
 
                 int userId = preferenceManager.getInt(Constants.USER_ID);
                 String usermail = preferenceManager.getString(Constants.USER_EMAIL);
+                firebaseToken = preferenceManager.getString(Constants.FIREBASE_TOKEN);
                 Integer platformId = Integer.valueOf(preferenceManager.getInt(Constants.PLATFORM_ID));
                 LogoutDone logoutDone = new LogoutDone();
                 if(logoutDone.logout(platformId,userId,usermail)){
                     preferenceManager.clear();
-                    Intent i = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(i);
-
+                    preferenceManager.putString(Constants.FIREBASE_TOKEN, firebaseToken);
+                    Intent intent = new Intent(getActivity(), SplashActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    getActivity().finishAffinity();
                 }else {
                     Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
                 }

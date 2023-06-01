@@ -3,12 +3,15 @@ package com.isapp.isstudentapp.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.databinding.ActivityTeacherProfileBinding;
 import com.isapp.isstudentapp.model.TeacherInfoModel;
+import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
 
@@ -74,10 +77,21 @@ public class TeacherProfileActivity extends AppCompatActivity {
 
 
 
-
-
-
-
     }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
+    }
+
+    NetworkChangeListener networkChangeListner = new NetworkChangeListener();
 
 }

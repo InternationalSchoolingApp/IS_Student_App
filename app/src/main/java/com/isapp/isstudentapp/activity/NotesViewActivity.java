@@ -3,6 +3,8 @@ package com.isapp.isstudentapp.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -10,6 +12,7 @@ import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.databinding.ActivityNotesViewBinding;
 import com.isapp.isstudentapp.model.DeleteNotes;
 import com.isapp.isstudentapp.model.GetNotes;
+import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
 
@@ -76,5 +79,20 @@ public class NotesViewActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
+    }
+
+    NetworkChangeListener networkChangeListner = new NetworkChangeListener();
 
 }

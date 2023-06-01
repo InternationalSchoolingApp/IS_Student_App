@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
 import com.isapp.isstudentapp.databinding.ActivityScheduleBinding;
 import com.isapp.isstudentapp.model.ScheduleModel;
+import com.isapp.isstudentapp.network.NetworkChangeListener;
 import com.isapp.isstudentapp.preference.PreferenceManager;
 import com.isapp.isstudentapp.retrofit.ApiInterface;
 import com.isapp.isstudentapp.retrofit.RetroFitClient;
@@ -60,6 +63,7 @@ public class ScheduleActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = new Date();
         ScheduleModel scheduleModel = new ScheduleModel(userId, String.valueOf(simpleDateFormat.format(startDate)), String.valueOf(getNextDate(new Date(), 1, "yyyy-MM-dd")));
+        Log.d("TAG", "onCreate: "+scheduleModel.toString());
         Call<ScheduleModel> call = apiInterface.getSchedule(scheduleModel);
         call.enqueue(new Callback<ScheduleModel>() {
             @Override
@@ -92,6 +96,21 @@ public class ScheduleActivity extends AppCompatActivity {
         return formatter.format(nextHourDate);
 
     }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
+    }
+
+    NetworkChangeListener networkChangeListner = new NetworkChangeListener();
 
 
 }

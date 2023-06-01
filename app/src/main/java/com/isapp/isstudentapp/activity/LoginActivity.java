@@ -80,6 +80,9 @@ public class LoginActivity extends AppCompatActivity {
     private void init() {
         ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
         colorOfStatusAndNavBar.loginAndForgetPassword(this);
+        binding.username.setHintEnabled(false);
+        binding.password.setHintEnabled(false);
+
         privacy = findViewById(R.id.privacy);
         terms = findViewById(R.id.terms_of_use);
         progressDialog = new ProgressDialog(this);

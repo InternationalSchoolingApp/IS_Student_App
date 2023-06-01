@@ -67,7 +67,7 @@ public class RecentConversionAdapter extends RecyclerView.Adapter<RecentConversi
                                                          intent.putExtra("subjectName", teacherSubject);
                                                          intent.putExtra("teacherEmail",teacherEmail);
                                                          v.getContext().startActivity(intent);
-                                                         ((Activity) v.getContext()).finish();
+
 
                                                      }
                                                  }

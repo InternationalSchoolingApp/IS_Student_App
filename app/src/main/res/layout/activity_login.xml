@@ -44,28 +44,7 @@
                 android:layout_marginTop="40dp"
                 android:src="@drawable/whitelogo" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/rubik"
-                android:includeFontPadding="false"
-                android:text="Welcome Back,"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/rubik_medium"
-                android:includeFontPadding="false"
-                android:text="Login to continue"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +61,8 @@
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
-
+                android:background="@drawable/curve_corner_less"
+                android:padding="2sp"
                 app:boxCornerRadiusTopStart="5dp"
                 app:boxStrokeColor="@color/is_light_blue"
                 app:boxStrokeErrorColor="@color/design_default_color_error"
@@ -97,8 +77,7 @@
                     android:includeFontPadding="false"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,7 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="3dp"
                 android:hint="Password"
+                android:background="@drawable/curve_corner_less"
+                android:padding="2sp"
                 android:includeFontPadding="false"
                 app:boxBackgroundColor="@color/white"
                 app:boxCollapsedPaddingTop="5dp"

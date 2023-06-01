@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.isapp.isstudentapp.R;
 import com.isapp.isstudentapp.activity.AssignedAdminRecentChat;
 import com.isapp.isstudentapp.activity.AssignedTeachersActivity;
+import com.isapp.isstudentapp.activity.ChatAdminActivity;
 import com.isapp.isstudentapp.activity.RecentChatActivity;
 
 
@@ -26,7 +27,7 @@ public class ChatFragment extends Fragment {
         admin = view.findViewById(R.id.admin_row);
 
         admin.setOnClickListener(v->{
-            Intent intent = new Intent(v.getContext(), AssignedAdminRecentChat.class);
+            Intent intent = new Intent(v.getContext(), ChatAdminActivity.class);
             startActivity(intent);
         });
         relativeLayout.setOnClickListener(new View.OnClickListener() {

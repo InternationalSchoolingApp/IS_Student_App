@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class Constants {
     public static final String USER_ID = "userId";
     public static final String ROLE = "roleType";
+    public static final String ON_HOLD = "hold";
     public static final String STUDENT_ROLE = "STUDENT";
     public static final String TEACHER_ROLE = "TEACHER";
     public static final String ADMIN_ROLE = "ADMIN";
