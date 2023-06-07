@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,9 +21,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
-
+        <activity
+            android:name=".activity.WebView"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_web_view"
+            android:theme="@style/AppTheme.Fullscreen" />
         <activity
             android:name=".activity.ChatAdminActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -152,8 +154,6 @@
             </intent-filter>
         </activity>
 
-
-
         <service
             android:name=".firebase.MyFirebaseMessagingService"
             android:exported="false">
@@ -165,6 +165,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name=".common.DeviceAdminReceiver"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

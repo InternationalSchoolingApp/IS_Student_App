@@ -41,6 +41,7 @@
     <string name="title_activity_schedule_view">ScheduleViewActivity</string>
     <string name="title_activity_assigned_admin_recent_chat">AssignedAdminRecentChat</string>
     <string name="title_activity_chat_admin">ChatAdminActivity</string>
+    <string name="title_activity_web_view">WebView</string>
 
 
 </resources>

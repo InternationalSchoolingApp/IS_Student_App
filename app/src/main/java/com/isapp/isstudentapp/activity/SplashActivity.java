@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.constant.Constants;
@@ -28,22 +25,20 @@ public class SplashActivity extends AppCompatActivity {
         ColorOfStatusAndNavBar colorOfStatusAndNavBar = new ColorOfStatusAndNavBar();
         colorOfStatusAndNavBar.colorOfStatusBar(this);
         super.onCreate(savedInstanceState);
-        binding = ActivitySplashBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(this);
-
-
-
-
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         boolean areNotificationsEnabled = notificationManager.areNotificationsEnabled();
         if (!areNotificationsEnabled) {
-            SPLASH_TIME =10000;
+            SPLASH_TIME = 15000;
             Intent intent = new Intent();
             intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
             intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
             startActivity(intent);
+            finish();
         }
+
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        preferenceManager = new PreferenceManager(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override

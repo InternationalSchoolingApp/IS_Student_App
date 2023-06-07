@@ -150,7 +150,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:textSize="12sp"
+                        android:textSize="16sp"
                         android:id="@+id/forget_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -198,6 +198,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Privacy"
+            android:textSize="16sp"
             android:autoLink="web"
             android:id="@+id/privacy"
             android:fontFamily="@font/rubik"
@@ -207,6 +208,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" &amp; "
+            android:textSize="16sp"
             android:fontFamily="@font/rubik"
             android:textAlignment="center"
             android:textColor="@color/design_default_color_error"/>
@@ -215,6 +217,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Terms of use"
+            android:textSize="16sp"
             android:autoLink="web"
             android:id="@+id/terms_of_use"
             android:fontFamily="@font/rubik"

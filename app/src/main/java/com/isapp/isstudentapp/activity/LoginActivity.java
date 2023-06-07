@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -111,16 +110,14 @@ public class LoginActivity extends AppCompatActivity {
             check();
         });
         binding.privacy.setOnClickListener(v->{
-            String url = "https://internationalschooling.org/privacy-policy/";
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
+            Intent intent = new Intent(v.getContext(), WebView.class);
+            intent.putExtra("url", "https://internationalschooling.org/privacy-policy-android/");
             startActivity(intent);
         });
 
         binding.termsOfUse.setOnClickListener(v->{
-            String url = "https://internationalschooling.org/terms-of-use/";
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
+            Intent intent = new Intent(v.getContext(), WebView.class);
+            intent.putExtra("url", "https://internationalschooling.org/terms-of-use-android/");
             startActivity(intent);
         });
     }
