@@ -68,12 +68,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="View Profile"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/rubik_medium"
                 android:textColor="@color/dash_gif_blue"
                 android:id="@+id/btn_more_profile"/>
-
-
-
 
         </LinearLayout>
 
@@ -95,6 +93,7 @@
         android:text="My Notes"
         android:textColor="@color/dash_gif_blue"
         android:id="@+id/notes_btn_more"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="5dp"
         android:background="@color/is_light_blue"

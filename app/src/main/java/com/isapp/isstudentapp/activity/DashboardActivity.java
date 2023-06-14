@@ -7,13 +7,12 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -116,8 +115,16 @@ public class DashboardActivity extends AppCompatActivity {
         dialog.show();
         androidx.appcompat.widget.AppCompatButton button, btnClose;
         btnClose = dialog.findViewById(R.id.btn_notNow);
+        button = dialog.findViewById(R.id.btn_retry);
         btnClose.setOnClickListener(v->{
             dialog.dismiss();
+        });
+        button.setOnClickListener(v->{
+            String url = "https://play.google.com/store/apps/details?id=com.isapp.isstudentapp";
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+                startActivity(intent);
         });
 
     }

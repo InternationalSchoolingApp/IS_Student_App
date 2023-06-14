@@ -14,12 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
-import com.isapp.isstudentapp.activity.ProfileActivity;
 import com.isapp.isstudentapp.R;
-import com.isapp.isstudentapp.activity.LoginActivity;
 import com.isapp.isstudentapp.activity.NotesActivity;
 import com.isapp.isstudentapp.activity.PerformanceActivity;
+import com.isapp.isstudentapp.activity.ProfileActivity;
 import com.isapp.isstudentapp.activity.SplashActivity;
 import com.isapp.isstudentapp.common.LogoutDone;
 import com.isapp.isstudentapp.constant.Constants;
@@ -35,7 +35,8 @@ import retrofit2.Response;
 public class MoreFragment extends Fragment {
     ProgressDialog progressDialog;
     Integer userId;
-PreferenceManager preferenceManager ;
+    PreferenceManager preferenceManager ;
+
     ImageView imageView;
     TextView name, grade;
     Button button_log, btn_perf, btn_notes, btn_view_profile;
@@ -61,6 +62,29 @@ PreferenceManager preferenceManager ;
         btn_perf = view.findViewById(R.id.performance_btn_more);
         btn_notes = view.findViewById(R.id.notes_btn_more);
         btn_view_profile = view.findViewById(R.id.btn_more_profile);
+
+
+        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
+        final UserProfile userProfile = new UserProfile(userId);
+        Call<UserProfile> call = apiInterface.profilePostData(userProfile);
+        call.enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                progressDialog.dismiss();
+                String url = response.body().getPictureLink();
+                url.replace("sch/", "sch/thumb_");
+                Glide.with(view).load(url).into(imageView);
+                name.setText(response.body().getName());
+                grade.setText(response.body().getGradeName());
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+
+
         button_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,25 +132,7 @@ PreferenceManager preferenceManager ;
             }
         });
 
-        ApiInterface apiInterface = RetroFitClient.getRetrofit().create(ApiInterface.class);
-        final UserProfile userProfile = new UserProfile(userId);
-        Call<UserProfile> call = apiInterface.profilePostData(userProfile);
-        call.enqueue(new Callback<UserProfile>() {
-            @Override
-            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                progressDialog.dismiss();
-                String url = response.body().getPictureLink();
-                url.replace("sch/", "sch/thumb_");
-                Glide.with(getContext()).load(url).into(imageView);
-                name.setText(response.body().getName());
-                grade.setText(response.body().getGradeName());
-            }
 
-            @Override
-            public void onFailure(Call<UserProfile> call, Throwable t) {
-                progressDialog.dismiss();
-            }
-        });
 
         return view;
 

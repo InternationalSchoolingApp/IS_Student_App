@@ -71,6 +71,9 @@ public interface ApiInterface {
     @POST("user-status")
     Call<Status> getUserStatus(@Body Status appUpdationCheckModel);
 
+    @POST("update-notification-log")
+    Call<NotificationLog> getUpdateNotification(@Body NotificationLog notificationLog);
+
 
 
 

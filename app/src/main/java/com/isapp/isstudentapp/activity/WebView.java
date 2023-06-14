@@ -1,25 +1,14 @@
 package com.isapp.isstudentapp.activity;
 
-import android.annotation.SuppressLint;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.InputType;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowInsets;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 import com.isapp.isstudentapp.common.ColorOfStatusAndNavBar;
 import com.isapp.isstudentapp.databinding.ActivityWebViewBinding;
-import com.isapp.isstudentapp.R;
 
 
 public class WebView extends AppCompatActivity {
@@ -52,9 +41,6 @@ public class WebView extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     public void setListeners(){
@@ -64,7 +50,6 @@ public class WebView extends AppCompatActivity {
         });
     }
 
-
     public void init(){
         binding = ActivityWebViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,8 +58,6 @@ public class WebView extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setCancelable(false);
-
-
     }
 
    }
