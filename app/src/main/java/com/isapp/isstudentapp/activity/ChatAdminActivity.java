@@ -80,8 +80,7 @@ public class ChatAdminActivity extends AppCompatActivity {
         colorOfStatusAndNavBar.colorOfStatusBar(this);
         init();
         getAdmin();
-        setListeners();
-        listenMessage();
+
 
     }
 
@@ -323,7 +322,6 @@ public class ChatAdminActivity extends AppCompatActivity {
                             JSONArray results = responseJson.getJSONArray("results");
                             if (responseJson.getInt("failure") == 1) {
                                 JSONObject error = (JSONObject) results.get(0);
-
                                 return;
                             }
                         }
@@ -373,6 +371,8 @@ public class ChatAdminActivity extends AppCompatActivity {
                     adminEmail = response.body().getAdminEmail();
                     adminName = response.body().getAdminName();
                     progressDialog.dismiss();
+                    setListeners();
+                    listenMessage();
 
                 }
             }
