@@ -100,6 +100,11 @@ public class DashboardActivity extends AppCompatActivity {
                 if (!response.body().getStatus().equals("success")){
                     LogoutDone logoutDone = new LogoutDone();
                     logoutDone.logout(preferenceManager.getInt(Constants.PLATFORM_ID), userId, preferenceManager.getString(Constants.USER_EMAIL));
+                    preferenceManager.clear();
+                    Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
                 }            }
 
             @Override
