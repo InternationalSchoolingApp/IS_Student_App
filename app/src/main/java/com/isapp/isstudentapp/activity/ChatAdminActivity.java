@@ -142,6 +142,8 @@ public class ChatAdminActivity extends AppCompatActivity {
         HashMap<String, Object> message = new HashMap<>();
         message.put("senderId", senderId);
         message.put("receiverId", adminEmail);
+        message.put("studentEmail", senderId);
+        message.put("adminEmail", adminEmail);
         message.put("message", binding.chatEdittext.getText().toString());
         message.put("timeStamp", new Date());
         message.put("type", "ADMIN_STUDENT");

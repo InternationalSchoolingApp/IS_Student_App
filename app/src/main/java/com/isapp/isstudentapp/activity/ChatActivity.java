@@ -116,6 +116,8 @@ public class ChatActivity extends BaseActivity {
         message.put(Constants.KEY_RECIEVER_ID, teacherEmail);
         message.put(Constants.KEY_MESSAGE, binding.chatEdittext.getText().toString());
         message.put(Constants.KEY_TIME_STAMP, new Date());
+        message.put("teacherEmail", teacherEmail);
+        message.put("studentEmail", senderId);
         database.collection(Constants.FIREBASE_CHAT_DB).add(message);
         if(!online){
             try{
@@ -261,7 +263,10 @@ public class ChatActivity extends BaseActivity {
 
     private void updateConversion(String message) {
         DocumentReference documentReference = database.collection(Constants.KEY_COLLECTIONS_CONVERSATION).document(conversionId);
-        documentReference.update(Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIME_STAMP, new Date(), Constants.KEY_SENDER_ID, senderId,
+        documentReference.update(
+                Constants.KEY_LAST_MESSAGE, message,
+                Constants.KEY_TIME_STAMP, new Date(),
+                Constants.KEY_SENDER_ID, senderId,
                 Constants.KEY_SENDER_NAME, preferenceManager.getString(Constants.NAME),
                 Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),
                 Constants.KEY_RECIEVER_ID, teacherEmail.toLowerCase(),

@@ -26,7 +26,6 @@ public interface ApiInterface {
     @POST("get-my-notes")
     Call<GetNotes> getMyNotes(@Body GetNotes getNotes);
 
-
     @POST("teacher-image")
     Call<TeacherInfoModel> teacherInfoModel(@Body TeacherInfoModel teacherInfoModel);
 
@@ -43,7 +42,7 @@ public interface ApiInterface {
     Call<LogoutModel> logoutPostData(@Body LogoutModel logoutModel);
 
 
-    @POST("dashboardApp")
+        @POST("dashboardApp")
     Call<DashBoardModel> dashboardPostData(@Body DashBoardModel dashBoardModel);
 
     @POST("get-notification-app")
