@@ -382,6 +382,9 @@ public class ChatActivity extends BaseActivity {
 
         }));
 
+
+
+
     }
 
 

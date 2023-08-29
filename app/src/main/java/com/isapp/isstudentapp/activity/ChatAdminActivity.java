@@ -191,33 +191,33 @@ public class ChatAdminActivity extends AppCompatActivity {
                 binding.chatEdittext.setText(null);
     }
 
-    private void listenAvailabilityOfReceiver() {
-        database.collection(Constants.FIREBASE_USER_DB).document(""+adminEmail).addSnapshotListener(ChatAdminActivity.this, ((value, error) -> {
-            if (error != null) {
-                return;
-            }
-            if (value != null) {
-                if (value.getLong(Constants.KEY_AVAILABLITY) != null) {
+        private void listenAvailabilityOfReceiver() {
+            database.collection(Constants.FIREBASE_USER_DB).document(""+adminEmail).addSnapshotListener(ChatAdminActivity.this, ((value, error) -> {
+                if (error != null) {
+                    return;
+                }
+                if (value != null) {
+                    if (value.getLong(Constants.KEY_AVAILABLITY) != null) {
 
+                    }
+                    if (value.get(Constants.FIREBASE_TOKEN) != null) {
+                        recieverFcmToken = Objects.requireNonNull(value.get(Constants.FIREBASE_TOKEN).toString());
+                    }
                 }
                 if (value.get(Constants.FIREBASE_TOKEN) != null) {
                     recieverFcmToken = Objects.requireNonNull(value.get(Constants.FIREBASE_TOKEN).toString());
+                    Log.d("FCM TOKEN", "listenAvailabilityOfReceiver: " + recieverFcmToken);
+                } else {
+                    Log.d("FCM TOKEN NULL", "listenAvailabilityOfReceiver: ");
                 }
-            }
-            if (value.get(Constants.FIREBASE_TOKEN) != null) {
-                recieverFcmToken = Objects.requireNonNull(value.get(Constants.FIREBASE_TOKEN).toString());
-                Log.d("FCM TOKEN", "listenAvailabilityOfReceiver: " + recieverFcmToken);
-            } else {
-                Log.d("FCM TOKEN NULL", "listenAvailabilityOfReceiver: ");
-            }
-            if (online) {
-                binding.textOnline.setVisibility(View.VISIBLE);
-            } else {
-                binding.textOnline.setVisibility(View.GONE);
-            }
+                if (online) {
+                    binding.textOnline.setVisibility(View.VISIBLE);
+                } else {
+                    binding.textOnline.setVisibility(View.GONE);
+                }
 
-        }));
-    }
+            }));
+        }
 
 
     private String getReadableDateTime(Date date) {
@@ -374,7 +374,6 @@ public class ChatAdminActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     setListeners();
                     listenMessage();
-
                 }
             }
 
