@@ -208,9 +208,7 @@ public class LoginActivity extends AppCompatActivity {
             data.put(Constants.SSID, ssid);
             data.put(Constants.FIREBASE_TOKEN, preferenceManager.getString(Constants.FIREBASE_TOKEN));
             user.document(mail).set(data).addOnSuccessListener(d -> {
-
             }).addOnFailureListener(exception -> {
-
             });
         }
 
